@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FitLog</h1>
+
+        <!-- Persoonlijk Profiel Sectie -->
+        <div class="section">
+            <h2>Persoonlijk Profiel</h2>
+            <form id="profileForm">
+                <label for="username">Gebruikersnaam:</label>
+                <input type="text" id="username" required>
+
+                <label for="birthdate">Geboortedatum:</label>
+                <input type="date" id="birthdate" required>
+
+                <label for="age">Leeftijd:</label>
+                <input type="number" id="age" required>
+
+                <label for="height">Lengte (cm):</label>
+                <input type="number" id="height" required>
+
+                <label for="goalWeight">Gewichtsdoel (kg):</label>
+                <input type="number" id="goalWeight" step="0.1" required>
+
+                <label for="timeFrame">Tijdsperiode om gewicht te verliezen (weken of maanden):</label>
+                <input type="number" id="timeFrame" required>
+                <select id="timeUnit" required>
+                    <option value="weeks">Weken</option>
+                    <option value="months">Maanden</option>
+                </select>
+
+                <button type="button" onclick="saveProfile()">Opslaan</button>
+            </form>
+        </div>
+
+        <!-- Gewichtslogboek Sectie -->
+        <div class="section">
+            <h2>Gewichtslogboek</h2>
+            <form id="weightForm">
+                <label for="weightDate">Datum:</label>
+                <input type="date" id="weightDate" required>
+
+                <label for="newWeight">Voer je gewicht in (kg):</label>
+                <input type="number" id="newWeight" step="0.1" required>
+                <button type="button" onclick="addWeight()">Toevoegen</button>
+            </form>
+            <div id="weightLog"></div>
+            <div id="weightGoalInfo">
+                <!-- Hier zullen we de gewichtsverliesinformatie tonen -->
+            </div>
+        </div>
+
+        <!-- Bloeddruk Logboek Sectie -->
+        <div class="section">
+            <h2>Bloeddruk Logboek</h2>
+            <p>Bloeddruk is een belangrijke maatstaf voor de gezondheid van je hart en bloedvaten. De bloeddruk wordt gemeten in millimeters kwik (mm Hg) en bestaat uit twee getallen: de systolische druk (het hoogste getal) en de diastolische druk (het laagste getal).</p>
+            <p><strong>Score Uitleg:</strong></p>
+            <ul>
+                <li><strong>Normaal:</strong> Systolisch < 120 mm Hg en Diastolisch < 80 mm Hg</li>
+                <li><strong>Verhoogd:</strong> Systolisch 120-129 mm Hg en Diastolisch < 80 mm Hg</li>
+                <li><strong>Hypertensie Stadium 1:</strong> Systolisch 130-139 mm Hg of Diastolisch 80-89 mm Hg</li>
+                <li><strong>Hypertensie Stadium 2:</strong> Systolisch ≥ 140 mm Hg of Diastolisch ≥ 90 mm Hg</li>
+                <li><strong>Hypertensieve Crisis:</strong> Systolisch > 180 mm Hg en/of Diastolisch > 120 mm Hg</li>
+            </ul>
+            <form id="bloodPressureForm">
+                <label for="bpDate">Datum:</label>
+                <input type="date" id="bpDate" required>
+
+                <label for="systolic">Systolische Bloeddruk (mm Hg):</label>
+                <input type="number" id="systolic" required>
+
+                <label for="diastolic">Diastolische Bloeddruk (mm Hg):</label>
+                <input type="number" id="diastolic" required>
+
+                <button type="button" onclick="addBloodPressure()">Toevoegen</button>
+            </form>
+            <div id="bloodPressureLog"></div>
+        </div>
+
+        <!-- Coopertest Logboek Sectie -->
+        <div class="section">
+            <h2>Coopertest Logboek</h2>
+            <p>De Coopertest is een fysieke conditietest waarbij je in 12 minuten zoveel mogelijk afstand probeert af te leggen. De behaalde afstand is een indicatie van je cardiovasculaire conditie.</p>
+            <p><strong>Score Uitleg voor Mannen:</strong></p>
+            <ul>
+                <li>< 1600 meter: Zeer slecht</li>
+                <li>1600 - 2199 meter: Slecht</li>
+                <li>2200 - 2399 meter: Gemiddeld</li>
+                <li>2400 - 2799 meter: Goed</li>
+                <li>> 2800 meter: Uitstekend</li>
+            </ul>
+            <p><strong>Score Uitleg voor Vrouwen:</strong></p>
+            <ul>
+                <li>< 1500 meter: Zeer slecht</li>
+                <li>1500 - 1799 meter: Slecht</li>
+                <li>1800 - 2199 meter: Gemiddeld</li>
+                <li>2200 - 2699 meter: Goed</li>
+                <li>> 2700 meter: Uitstekend</li>
+            </ul>
+            <form id="cooperTestForm">
+                <label for="cooperDate">Datum:</label>
+                <input type="date" id="cooperDate" required>
+
+                <label for="distance">Afgelegde afstand (meters):</label>
+                <input type="number" id="distance" required>
+
+                <button type="button" onclick="addCooperTest()">Toevoegen</button>
+            </form>
+            <div id="cooperLog"></div>
+        </div>
+
+        <!-- Airborne Benchmark WOD Sectie -->
+        <div class="section">
+            <h2>Airborne Benchmark WOD</h2>
+            <p>Deze WOD (Workout of the Day) is ontworpen om je uithoudingsvermogen en kracht te testen. Probeer in 30 minuten zoveel mogelijk rondes van de volgende oefeningen te voltooien:</p>
+            <ul>
+                <li>400 meter Run</li>
+                <li>15x Air Squats</li>
+                <li>15x Butterfly Sit-Ups</li>
+                <li>10x Push-Ups</li>
+                <li>5x Power Band Pull-Ups</li>
+            </ul>
+            <form id="airborneWodForm">
+                <label for="airborneDate">Datum:</label>
+                <input type="date" id="airborneDate" required>
+
+                <label for="roundsCompleted">Aantal Voltooide Ronden:</label>
+                <input type="number" id="roundsCompleted" step="0.1" required>
+
+                <button type="button" onclick="addAirborneWod()">Toevoegen</button>
+            </form>
+            <div id="airborneLog"></div>
+        </div>
+
+        <!-- Samenvatting van Fitheid -->
+        <div class="section">
+            <h2>Samenvatting van je Fitheid</h2>
+            <button type="button" onclick="generateFitnessSummary()">Genereer Samenvatting</button>
+            <div id="fitnessSummary">
+                <!-- Hier zal de samenvatting van de fitheid worden weergegeven -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
